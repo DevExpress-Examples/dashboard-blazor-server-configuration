@@ -1,7 +1,7 @@
 <!-- default file list -->
 *Files to look at*:
 
-* [Dashboard.razor](./CS/BlazorDashboardApp/Client/Pages/Dashboard.razor)
+* [Dashboard.razor](./CS/BlazorDashboardApp/Pages/Dashboard.razor)
 <!-- default file list end -->
 
 # Dashboard Blazor Server App - Configuration

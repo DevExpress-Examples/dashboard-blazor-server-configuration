@@ -1,0 +1,38 @@
+﻿@page "/dashboard"
+
+<select id="dashboard-selector" @bind="DashboardIdValue">
+    <option value="companies">Companies</option>
+    <option value="products">Products</option>
+    <option value="support">Support</option>
+
+</select>
+<button id="workingModeSwitcher" @onclick="ChangeWorkingMode">
+    @ButtonText
+</button>
+
+<DxDashboard Endpoint="@endpoint" @bind-WorkingMode="@workingMode" @bind-DashboardId="@DashboardIdValue" style="width: 100%; height: 800px;">
+    <DxBackendOptions RequestHttpHeaders="@headers"></DxBackendOptions>
+    <DxExtensions>
+        <DxDataInspector AllowInspectAggregatedData="true" AllowInspectRawData="true"></DxDataInspector>
+    </DxExtensions>    
+</DxDashboard>
+
+@code {
+    string endpoint = "api/dashboard";
+    WorkingMode workingMode = WorkingMode.Designer;
+    public string DashboardIdValue { get; set; } = "companies";
+
+    public Dictionary<string, string> headers = new Dictionary<string, string>() { { "Authorization", "UniqueAuthKey" } };
+
+    public void ChangeWorkingMode() {
+        workingMode = workingMode == WorkingMode.Designer ? WorkingMode.Viewer : WorkingMode.Designer;
+    }
+
+    public string ButtonText {
+        get {
+            string value = workingMode == WorkingMode.Designer ? "Viewer" : "Designer";
+            string mode = "Switch to " + value;
+            return mode;
+        }
+    }
+}

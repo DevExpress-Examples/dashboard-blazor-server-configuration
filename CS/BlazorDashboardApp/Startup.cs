@@ -25,13 +25,18 @@ namespace BlazorDashboardApp {
         public void ConfigureServices(IServiceCollection services) {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddMvc()
-                    .AddDefaultDashboardController(configurator => {
-                    configurator.SetDashboardStorage(new DashboardFileStorage(FileProvider.GetFileInfo("App_Data/Dashboards").PhysicalPath));
-                    configurator.SetDataSourceStorage(new DataSourceInMemoryStorage());
-                    configurator.SetConnectionStringsProvider(new DashboardConnectionStringsProvider(Configuration));
-                    configurator.ConfigureDataConnection += Configurator_ConfigureDataConnection;
-                    });
+            services.AddMvc();
+
+            services.AddScoped<DashboardConfigurator>((IServiceProvider serviceProvider) => {
+                DashboardConfigurator configurator = new DashboardConfigurator();
+                
+                configurator.SetDashboardStorage(new DashboardFileStorage(FileProvider.GetFileInfo("App_Data/Dashboards").PhysicalPath));
+                configurator.SetDataSourceStorage(new DataSourceInMemoryStorage());
+                configurator.SetConnectionStringsProvider(new DashboardConnectionStringsProvider(Configuration));
+                configurator.ConfigureDataConnection += Configurator_ConfigureDataConnection;
+
+                return configurator;
+            });
         }
 
         private void Configurator_ConfigureDataConnection(object sender, ConfigureDataConnectionWebEventArgs e) {
@@ -71,7 +76,7 @@ namespace BlazorDashboardApp {
             app.UseRouting();
 
             app.UseEndpoints(endpoints => {
-                EndpointRouteBuilderExtension.MapDashboardRoute(endpoints, "api/dashboard");
+                EndpointRouteBuilderExtension.MapDashboardRoute(endpoints, "api/dashboard", "DefaultDashboard");
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
             });

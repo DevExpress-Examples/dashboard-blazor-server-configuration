@@ -9,7 +9,7 @@
 * [Dashboard.razor](./CS/BlazorDashboardApp/Pages/Dashboard.razor)
 <!-- default file list end -->
 
-# Dashboard Blazor Server App - Configuration
+# Dashboard for Blazor WebAssembly - Configuration
 
 This example shows how you can configure the `DxDashboard` component in a Blazor Server application:
 

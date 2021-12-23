@@ -40,19 +40,19 @@ namespace BlazorDashboardApp {
         }
 
         private void Configurator_ConfigureDataConnection(object sender, ConfigureDataConnectionWebEventArgs e) {
-            if (e.DataSourceName.Contains("Support")) {
+            if (e.ConnectionName == "jsonSupport") {
                 Uri fileUri = new Uri(FileProvider.GetFileInfo("App_data/Support.json").PhysicalPath, UriKind.RelativeOrAbsolute);
                 JsonSourceConnectionParameters jsonParams = new JsonSourceConnectionParameters();
                 jsonParams.JsonSource = new UriJsonSource(fileUri);
                 e.ConnectionParameters = jsonParams;
             }
-            if (e.DataSourceName.Contains("Categories")) {
+            if (e.ConnectionName == "jsonCategories") {
                 Uri fileUri = new Uri(FileProvider.GetFileInfo("App_data/Categories.json").PhysicalPath, UriKind.RelativeOrAbsolute);
                 JsonSourceConnectionParameters jsonParams = new JsonSourceConnectionParameters();
                 jsonParams.JsonSource = new UriJsonSource(fileUri);
                 e.ConnectionParameters = jsonParams;
             }
-            if (e.DataSourceName.Contains("Customers")) {
+            if (e.ConnectionName == "jsonCustomers") {
                 JsonSourceConnectionParameters jsonParams = new JsonSourceConnectionParameters();
                 jsonParams.JsonSource = new UriJsonSource(
                     new Uri("https://raw.githubusercontent.com/DevExpress-Examples/DataSources/master/JSON/customers.json"));

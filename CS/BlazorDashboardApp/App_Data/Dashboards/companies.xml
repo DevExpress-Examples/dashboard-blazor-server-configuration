@@ -2,7 +2,7 @@
 <Dashboard>
   <Title Text="Companies" />
   <DataSources>
-    <JsonDataSource Name="Customers" RootElement="Customers" ComponentName="jsonDataSource1">
+    <JsonDataSource Name="Customers" RootElement="Customers" ComponentName="jsonDataSource1" ConnectionName="jsonCustomers">
       <Source SourceType="DevExpress.DataAccess.Json.UriJsonSource" Uri="https://raw.githubusercontent.com/DevExpress-Examples/DataSources/master/JSON/customers.json" />
       <Schema>
         <Node Name="root" Type="System.Object" Selected="true" NodeType="Object">

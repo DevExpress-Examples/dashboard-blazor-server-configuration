@@ -1,4 +1,4 @@
-﻿@page "/dashboard"
+﻿@page "/"
 
 <select id="dashboard-selector" @bind="DashboardIdValue">
     <option value="companies">Companies</option>
@@ -14,7 +14,7 @@
     <DxBackendOptions RequestHttpHeaders="@headers"></DxBackendOptions>
     <DxExtensions>
         <DxDataInspector AllowInspectAggregatedData="true" AllowInspectRawData="true"></DxDataInspector>
-    </DxExtensions>    
+    </DxExtensions>
 </DxDashboard>
 
 @code {
